@@ -1,25 +1,46 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import { Map } from './Map';
+import { Profile } from './Profile';
+import { Login } from './Login';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+const PAGES = {
+  map: <Map />,
+  profile: <Profile />,
+  login: <Login />
+}
+
+class App extends React.Component {
+  state = { currentPage: 'map' }  
+
+  navigateTo = (page) => {
+    this.setState({ currentPage: page });
+  }
+
+  render() {
+    return (
+      <>
+      <header>
+        <nav>
+          <ul>
+            <li>
+              <button onClick={() => {this.navigateTo('map')}}>Карта</button>
+            </li>
+            <li>
+              <button onClick={() => {this.navigateTo('profile')}}>Профиль</button>
+            </li>
+            <li>
+              <button onClick={() => {this.navigateTo('login')}}>Логин</button>
+            </li>
+          </ul>
+        </nav>
       </header>
-    </div>
-  );
+      <main>
+        <section>{PAGES[this.state.currentPage]}</section>
+      </main>
+      </>
+    )
+  }
 }
 
 export default App;
