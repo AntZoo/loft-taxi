@@ -5,15 +5,8 @@ import { Profile } from './Profile'
 import { Login } from './Login'
 import { Registration } from './Registration'
 
-const PAGES = {
-  map: <Map />,
-  profile: <Profile />,
-  login: <Login />,
-  registration: <Registration />,
-}
-
 class App extends React.Component {
-  state = { currentPage: 'map', authenticated: false }
+  state = { currentPage: 'login', authenticated: false }
 
   navigateTo = (page) => {
     this.setState({ currentPage: page })
@@ -25,6 +18,13 @@ class App extends React.Component {
 
   logout = () => {
     this.setState({ authenticated: false })
+  }
+
+  PAGES = {
+    map: <Map loginFunc={this.login} navFunc={this.navigateTo} />,
+    profile: <Profile loginFunc={this.login} navFunc={this.navigateTo} />,
+    login: <Login loginFunc={this.login} navFunc={this.navigateTo} />,
+    registration: <Registration loginFunc={this.login} navFunc={this.navigateTo} />,
   }
 
   render() {
@@ -51,8 +51,8 @@ class App extends React.Component {
             <li>
               <button
                 onClick={() => {
-                  this.logout();
-                  this.navigateTo('login');
+                  this.logout()
+                  this.navigateTo('login')
                 }}>
                 Выйти
               </button>
@@ -66,9 +66,7 @@ class App extends React.Component {
               <button
                 onClick={() => {
                   this.navigateTo('login')
-                }}
-                authState={this.state.authenticated}
-                nacFunc={this.navigateTo}>
+                }}>
                 Логин
               </button>
             </li>
@@ -80,12 +78,10 @@ class App extends React.Component {
     return (
       <>
         <header>
-          <nav>
-            { renderNavMenu() }}
-          </nav>
+          <nav>{renderNavMenu()}}</nav>
         </header>
         <main>
-          <section>{PAGES[this.state.currentPage]}</section>
+          <section>{this.PAGES[this.state.currentPage]}</section>
         </main>
       </>
     )
