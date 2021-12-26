@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types'
 
 export const Login = (props) => {
     return <><form>
@@ -15,4 +16,9 @@ export const Login = (props) => {
             props.navFunc('registration');
         }}>Зарегистрироваться</button>]
         </form></>
+}
+
+Login.propTypes = {
+    loginFunc: PropTypes.func,
+    navFunc: PropTypes.func
 }

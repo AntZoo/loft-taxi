@@ -1,9 +1,10 @@
 import React from 'react'
 import './App.css'
-import { Map } from './Map'
-import { Profile } from './Profile'
-import { Login } from './Login'
-import { Registration } from './Registration'
+import { Map } from './pages/Map'
+import { Profile } from './pages/Profile'
+import { Login } from './pages/Login'
+import { Registration } from './pages/Registration'
+import { Header } from './components/Header'
 
 class App extends React.Component {
   state = { currentPage: 'login', authenticated: false }
@@ -20,68 +21,17 @@ class App extends React.Component {
     this.setState({ authenticated: false })
   }
 
-  PAGES = {
-    map: <Map loginFunc={this.login} navFunc={this.navigateTo} />,
-    profile: <Profile loginFunc={this.login} navFunc={this.navigateTo} />,
-    login: <Login loginFunc={this.login} navFunc={this.navigateTo} />,
-    registration: <Registration loginFunc={this.login} navFunc={this.navigateTo} />,
-  }
-
   render() {
-    const renderNavMenu = () => {
-      if (this.state.authenticated) {
-        return (
-          <ul>
-            <li>
-              <button
-                onClick={() => {
-                  this.navigateTo('map')
-                }}>
-                Карта
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => {
-                  this.navigateTo('profile')
-                }}>
-                Профиль
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => {
-                  this.logout()
-                  this.navigateTo('login')
-                }}>
-                Выйти
-              </button>
-            </li>
-          </ul>
-        )
-      } else {
-        return (
-          <ul>
-            <li>
-              <button
-                onClick={() => {
-                  this.navigateTo('login')
-                }}>
-                Логин
-              </button>
-            </li>
-          </ul>
-        )
-      }
-    }
-
     return (
       <>
-        <header>
-          <nav>{renderNavMenu()}}</nav>
-        </header>
+      <Header authenticated={this.state.authenticated} navFunc={this.navigateTo} logoutFunc={this.logout} />
         <main>
-          <section>{this.PAGES[this.state.currentPage]}</section>
+          <section>
+            {this.state.currentPage === 'map' && <Map />}  
+            {this.state.currentPage === 'profile' && <Profile />}  
+            {this.state.currentPage === 'login' && <Login loginFunc={this.login} navFunc={this.navigateTo} />}  
+            {this.state.currentPage === 'registration' && <Registration loginFunc={this.login} navFunc={this.navigateTo} />}  
+          </section>
         </main>
       </>
     )
