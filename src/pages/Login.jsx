@@ -1,8 +1,12 @@
 import React from "react";
 import PropTypes from 'prop-types'
+import Sidebar from "../components/Sidebar";
 
 export const Login = (props) => {
-    return <><form>
+    return (
+        <>
+    <Sidebar />
+    <form>
         <input id='email' name='email' type='email' />
         <input id='password' name='password' type='password' />
 
@@ -15,7 +19,8 @@ export const Login = (props) => {
             console.log('register');
             props.navFunc('registration');
         }}>Зарегистрироваться</button>]
-        </form></>
+    </form>
+    </>)
 }
 
 Login.propTypes = {
