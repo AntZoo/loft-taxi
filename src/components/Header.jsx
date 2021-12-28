@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Header = (props) => {
+const Header = (props) => {
   return (
     <header>
       <nav>
@@ -9,7 +9,7 @@ export const Header = (props) => {
             <li>
               <button
                 onClick={() => {
-                  props.navigateTo('map')
+                  props.navFunc('map')
                 }}>
                 Карта
               </button>
@@ -19,7 +19,7 @@ export const Header = (props) => {
             <li>
               <button
                 onClick={() => {
-                  props.navigateTo('profile')
+                  props.navFunc('profile')
                 }}>
                 Профиль
               </button>
@@ -30,7 +30,7 @@ export const Header = (props) => {
               <button
                 onClick={() => {
                   props.logoutFunc()
-                  props.navigateTo('login')
+                  props.navFunc('login')
                 }}>
                 Выйти
               </button>
@@ -40,7 +40,7 @@ export const Header = (props) => {
             <li>
               <button
                 onClick={() => {
-                  props.navigateTo('login')
+                  props.navFunc('login')
                 }}>
                 Логин
               </button>
@@ -51,3 +51,5 @@ export const Header = (props) => {
     </header>
   )
 }
+
+export default Header;
