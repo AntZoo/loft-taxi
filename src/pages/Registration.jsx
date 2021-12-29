@@ -1,20 +1,30 @@
-import React from "react";
+import React from 'react';
 import PropTypes from 'prop-types';
+import { withAuth } from '../AuthContext';
 
-export const Registration = (props) => {
-    return <><form>
-    <input id='email' name='email' type='email' />
-    <input id='password' name='password' type='password' />
+const Registration = (props) => {
+  const register = (event) => {
+    event.preventDefault();
+    const { email, password } = event.target;
+    props.register(email.value, password.value, props.navFunc, 'map');
+  };
 
-    <button type='button' onClick={() => {
-        console.log('register');
-        props.loginFunc();
-        props.navFunc('map');
-    }}>Зарегистрироваться</button>]
-    </form></>
-}
+  return (
+    <>
+      <form onSubmit={register}>
+        <label htmlFor='email'>Email:</label>
+        <input id='email' name='email' type='email' />
+        <label htmlFor='password'>Password:</label>
+        <input id='password' name='password' type='password' />
+        <button>Зарегистрироваться</button>]
+      </form>
+    </>
+  );
+};
 
 Registration.propTypes = {
-    loginFunc: PropTypes.func,
-    navFunc: PropTypes.func
-}
+  loginFunc: PropTypes.func,
+  navFunc: PropTypes.func,
+};
+
+export const RegistrationWithAuth = withAuth(Registration);

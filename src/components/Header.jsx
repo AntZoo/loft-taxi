@@ -1,46 +1,47 @@
-import React from 'react'
+import React from 'react';
+import { withAuth } from '../AuthContext';
 
 const Header = (props) => {
   return (
     <header>
       <nav>
         <ul>
-          {props.authenticated && (
+          {props.isLoggedIn && (
             <li>
               <button
                 onClick={() => {
-                  props.navFunc('map')
+                  props.navFunc('map');
                 }}>
                 Карта
               </button>
             </li>
           )}
-          {props.authenticated && (
+          {props.isLoggedIn && (
             <li>
               <button
                 onClick={() => {
-                  props.navFunc('profile')
+                  props.navFunc('profile');
                 }}>
                 Профиль
               </button>
             </li>
           )}
-          {props.authenticated && (
+          {props.isLoggedIn && (
             <li>
               <button
                 onClick={() => {
-                  props.logoutFunc()
-                  props.navFunc('login')
+                  props.logout();
+                  props.navFunc('login');
                 }}>
                 Выйти
               </button>
             </li>
           )}
-          {!props.authenticated && (
+          {!props.isLoggedIn && (
             <li>
               <button
                 onClick={() => {
-                  props.navFunc('login')
+                  props.navFunc('login');
                 }}>
                 Логин
               </button>
@@ -49,7 +50,7 @@ const Header = (props) => {
         </ul>
       </nav>
     </header>
-  )
-}
+  );
+};
 
-export default Header;
+export default withAuth(Header);

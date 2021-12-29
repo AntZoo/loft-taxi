@@ -1,29 +1,40 @@
-import React from "react";
-import PropTypes from 'prop-types'
-import Sidebar from "../components/Sidebar";
+import React from 'react';
+import PropTypes from 'prop-types';
+import Sidebar from '../components/Sidebar';
+import { withAuth } from '../AuthContext';
 
-export const Login = (props) => {
-    return (
-        <>
-    <Sidebar />
-    <form>
+const Login = (props) => {
+  const authenticate = (event) => {
+    event.preventDefault();
+    const { email, password } = event.target;
+    props.login(email.value, password.value, props.navFunc, 'map');
+  };
+
+  return (
+    <>
+      <Sidebar />
+      <form onSubmit={authenticate}>
+        <label htmlFor='email'>Email:</label>
         <input id='email' name='email' type='email' />
+        <label htmlFor='password'>Password:</label>
         <input id='password' name='password' type='password' />
-
-        <button type='button' onClick={() => {
-            console.log('logged in');
-            props.loginFunc();
-            props.navFunc('map');
-        }}>Логин</button>]
-        <button type='button' onClick={() => {
-            console.log('register');
+        <button>Логин</button>]
+        <button
+          type='button'
+          onClick={() => {
             props.navFunc('registration');
-        }}>Зарегистрироваться</button>]
-    </form>
-    </>)
-}
+          }}>
+          Зарегистрироваться
+        </button>
+        ]
+      </form>
+    </>
+  );
+};
 
 Login.propTypes = {
-    loginFunc: PropTypes.func,
-    navFunc: PropTypes.func
-}
+  loginFunc: PropTypes.func,
+  navFunc: PropTypes.func,
+};
+
+export const LoginWithAuth = withAuth(Login);

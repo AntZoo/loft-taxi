@@ -1,40 +1,42 @@
-import React, {useState} from 'react'
-import './App.css'
-import { Map } from './pages/Map'
-import { Profile } from './pages/Profile'
-import { Login } from './pages/Login'
-import { Registration } from './pages/Registration'
-import Header from './components/Header'
+import React, { useState } from 'react';
+import './App.css';
+import { Map } from './pages/Map';
+import { Profile } from './pages/Profile';
+import { LoginWithAuth } from './pages/Login';
+import { RegistrationWithAuth } from './pages/Registration';
+import Header from './components/Header';
+import { withAuth } from './AuthContext';
 
-const App = () => {
+const App = (props) => {
   const [currentPage, setCurrentPage] = useState('login');
-  const [authenticated, setAuthenticated] = useState(false);
 
   const navigateTo = (page) => {
-    setCurrentPage(page)
-  }
+    if (props.isLoggedIn || ['login', 'registration'].includes(page)) {
+      setCurrentPage(page);
+    } else {
+      setCurrentPage('login');
+    }
+  };
 
-  const login = () => {
-    setAuthenticated(true)
-  }
-
-  const logout = () => {
-    setAuthenticated(false)
-  }
+  React.useEffect(() => {
+    navigateTo('map');
+  }, [props.isLoggedIn]);
 
   return (
     <>
-    <Header authenticated={authenticated} navFunc={navigateTo} logoutFunc={logout} />
+      <Header navFunc={navigateTo} />
       <main>
         <section>
-          {currentPage === 'map' && <Map />}  
-          {currentPage === 'profile' && <Profile />}  
-          {currentPage === 'login' && <Login loginFunc={login} navFunc={navigateTo} />}  
-          {currentPage === 'registration' && <Registration loginFunc={login} navFunc={navigateTo} />}  
+          {currentPage === 'map' && <Map />}
+          {currentPage === 'profile' && <Profile />}
+          {currentPage === 'login' && <LoginWithAuth navFunc={navigateTo} />}
+          {currentPage === 'registration' && (
+            <RegistrationWithAuth navFunc={navigateTo} />
+          )}
         </section>
       </main>
     </>
-  )
-}
+  );
+};
 
-export default App
+export default withAuth(App);
