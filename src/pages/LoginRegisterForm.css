@@ -1,0 +1,46 @@
+form {
+  display: flex;
+  flex-flow: column;
+  width: 355px;
+}
+
+.button-link {
+  background: none !important;
+  border: none;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  color: #fdbf5a;
+  cursor: pointer;
+}
+
+.under-form {
+  margin-top: 6px;
+  text-align: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  bottom: 55px;
+}
+
+.under-button {
+  margin-top: 33px;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+input {
+  margin-bottom: 25px;
+  outline: 0;
+  border-width: 0 0 2px;
+  border-color: #e4e4e4;
+}
+
+input:focus {
+  border-color: #fdbf5a;
+}
