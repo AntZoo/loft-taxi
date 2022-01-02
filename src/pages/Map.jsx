@@ -1,12 +1,33 @@
-import React, { Component } from "react";
-import mapboxgl from 'mapbox-gl'
+import React, { Component } from 'react';
+import mapboxgl from 'mapbox-gl';
+import './Map.css';
 
 export class Map extends Component {
-    
+  map = null;
+  mapContainer = React.createRef();
+
+  componentDidMount() {
+    mapboxgl.accessToken =
+      'pk.eyJ1IjoiYW50em9vIiwiYSI6ImNreHFreXplajBhN20ycm1wcWhqczVtN2QifQ.1BAN24fhV7l2BGx7DkdBTw';
+
+    this.map = new mapboxgl.Map({
+      container: this.mapContainer.current,
+      attributionControl: false,
+      style: 'mapbox://styles/mapbox/streets-v9',
+      center: [30.3166718, 59.9500019],
+      zoom: 15,
+    });
+  }
+
+  componentWillUnmount() {
+    this.map.remove();
+  }
+
+  render() {
+    return (
+      <div className='map-wrapper'>
+        <div data-testid='map' className='map' ref={this.mapContainer} />
+      </div>
+    );
+  }
 }
-
-// export const Map = () => {
-//     const screenHeight = (window.screen.availHeight - 250) + 'px';
-
-//     return <><iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A1f77aa9f31691ebf59ef088fab4003dd1273ff8092d7e2db9800794af505a3ef&amp;source=constructor" width="100%" height={screenHeight} frameBorder="0"></iframe></>
-// }
