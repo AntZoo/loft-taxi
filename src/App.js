@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import { Map } from './pages/Map';
 import { Profile } from './pages/Profile';
 import { LoginWithAuth } from './pages/Login';
