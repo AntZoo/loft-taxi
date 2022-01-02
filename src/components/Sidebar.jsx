@@ -1,11 +1,20 @@
-import React from "react";
+import React from 'react';
+import './Sidebar.css';
+import { Logo } from 'loft-taxi-mui-theme';
 
-const Sidebar = () => {
-    return (
-        <div className="sidebar">
-            <span className="logo-text">Loft Taxi</span>
+export const Sidebar = (props) => {
+  return (
+    <div className='sidebar-wrap'>
+      <div className='sidebar'>
+        <div
+          className='sidebar-logo'
+          onClick={() => {
+            props.navFunc('login');
+          }}>
+          <Logo />
         </div>
-    )
-}
-
-export default Sidebar;
+      </div>
+      <div className='sidebar-background'></div>
+    </div>
+  );
+};
