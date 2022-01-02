@@ -1,16 +1,15 @@
 import React from 'react';
 
-export const AuthContext = React.createContext();
+export const AppContext = React.createContext();
 
-export const AuthProvider = ({ children }) => {
+export const AppProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [activePage, setActivePage] = React.useState('login');
 
   const login = (email, password, navigate, where) => {
-    console.log(email, password);
-    if (email !== 'valid@email.com' || password !== 'mmm') {
+    if (email !== 'valid@email.com' || password === '') {
       return;
     }
-    console.log('logged in');
     setIsLoggedIn(true);
   };
 
@@ -22,20 +21,27 @@ export const AuthProvider = ({ children }) => {
     setIsLoggedIn(false);
   };
 
-  const value = { login, logout, register, isLoggedIn };
+  const value = {
+    login,
+    logout,
+    register,
+    isLoggedIn,
+    activePage,
+    setActivePage,
+  };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
-export const withAuth = (WrappedComponent) => {
+export const withContext = (WrappedComponent) => {
   return class extends React.Component {
     render() {
       return (
-        <AuthContext.Consumer>
+        <AppContext.Consumer>
           {(value) => {
             return <WrappedComponent {...value} {...this.props} />;
           }}
-        </AuthContext.Consumer>
+        </AppContext.Consumer>
       );
     }
   };
