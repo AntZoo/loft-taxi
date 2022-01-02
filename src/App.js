@@ -1,36 +1,39 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
 import { Map } from './pages/Map';
 import { Profile } from './pages/Profile';
 import { LoginWithAuth } from './pages/Login';
 import { RegistrationWithAuth } from './pages/Registration';
 import Header from './components/Header';
-import { withAuth } from './AuthContext';
+import { withContext } from './helpers/AppContext';
+import { Sidebar } from './components/Sidebar';
 
 const App = (props) => {
-  const [currentPage, setCurrentPage] = useState('login');
-
   const navigateTo = (page) => {
     if (props.isLoggedIn || ['login', 'registration'].includes(page)) {
-      setCurrentPage(page);
+      props.setActivePage(page);
     } else {
-      setCurrentPage('login');
+      props.setActivePage('login');
     }
   };
 
   React.useEffect(() => {
     navigateTo('map');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.isLoggedIn]);
 
   return (
     <>
-      <Header navFunc={navigateTo} />
+      {props.isLoggedIn && <Header navFunc={navigateTo} />}
+      {!props.isLoggedIn && <Sidebar navFunc={navigateTo} />}
       <main>
         <section>
-          {currentPage === 'map' && <Map />}
-          {currentPage === 'profile' && <Profile />}
-          {currentPage === 'login' && <LoginWithAuth navFunc={navigateTo} />}
-          {currentPage === 'registration' && (
+          {props.activePage === 'map' && <Map />}
+          {props.activePage === 'profile' && <Profile />}
+          {props.activePage === 'login' && (
+            <LoginWithAuth navFunc={navigateTo} />
+          )}
+          {props.activePage === 'registration' && (
             <RegistrationWithAuth navFunc={navigateTo} />
           )}
         </section>
@@ -39,4 +42,4 @@ const App = (props) => {
   );
 };
 
-export default withAuth(App);
+export default withContext(App);

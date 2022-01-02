@@ -1,14 +1,24 @@
 import React from 'react';
-import { withAuth } from '../AuthContext';
+import { withContext } from '../helpers/AppContext';
+import { Logo } from 'loft-taxi-mui-theme';
+import './Header.css';
 
 const Header = (props) => {
   return (
-    <header>
+    <header className='main-nav'>
       <nav>
-        <ul>
+        <div className='nav-logo'>
+          <Logo />
+        </div>
+        <ul className='nav-list'>
           {props.isLoggedIn && (
             <li>
               <button
+                className={
+                  props.activePage === 'map'
+                    ? 'nav-button active'
+                    : 'nav-button'
+                }
                 onClick={() => {
                   props.navFunc('map');
                 }}>
@@ -19,6 +29,11 @@ const Header = (props) => {
           {props.isLoggedIn && (
             <li>
               <button
+                className={
+                  props.activePage === 'profile'
+                    ? 'nav-button active'
+                    : 'nav-button'
+                }
                 onClick={() => {
                   props.navFunc('profile');
                 }}>
@@ -29,6 +44,7 @@ const Header = (props) => {
           {props.isLoggedIn && (
             <li>
               <button
+                className='nav-button'
                 onClick={() => {
                   props.logout();
                   props.navFunc('login');
@@ -40,6 +56,11 @@ const Header = (props) => {
           {!props.isLoggedIn && (
             <li>
               <button
+                className={
+                  props.activePage === 'login'
+                    ? 'nav-button active'
+                    : 'nav-button'
+                }
                 onClick={() => {
                   props.navFunc('login');
                 }}>
@@ -53,4 +74,4 @@ const Header = (props) => {
   );
 };
 
-export default withAuth(Header);
+export default withContext(Header);

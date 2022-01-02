@@ -1,0 +1,34 @@
+.main-nav {
+  background-color: #1c1a19;
+}
+.nav-list {
+  list-style-type: none;
+  display: flex;
+  justify-content: flex-end;
+}
+.nav-list li {
+  display: inline;
+}
+.nav-list button {
+  background: none !important;
+  border: none;
+  padding: 39px 50px 38px 0;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 21px;
+  line-height: 25px;
+  color: white;
+  cursor: pointer;
+}
+.nav-list button.active {
+  color: #fdbf5a;
+}
+.nav-logo img {
+  display: inline;
+  padding: 21px 0 20px 27px;
+}
+nav {
+  display: flex;
+  justify-content: space-between;
+}
