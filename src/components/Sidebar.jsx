@@ -1,6 +1,7 @@
 import React from 'react';
 import './Sidebar.css';
 import { Logo } from 'loft-taxi-mui-theme';
+import PropTypes from 'prop-types';
 
 export const Sidebar = (props) => {
   return (
@@ -17,4 +18,8 @@ export const Sidebar = (props) => {
       <div className='sidebar-background'></div>
     </div>
   );
+};
+
+Sidebar.propTypes = {
+  navFunc: PropTypes.func,
 };

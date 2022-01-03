@@ -2,6 +2,7 @@ import React from 'react';
 import { withContext } from '../helpers/AppContext';
 import { Logo } from 'loft-taxi-mui-theme';
 import './Header.css';
+import PropTypes from 'prop-types';
 
 const Header = (props) => {
   return (
@@ -75,3 +76,10 @@ const Header = (props) => {
 };
 
 export default withContext(Header);
+
+Header.propTypes = {
+  isLoggedIn: PropTypes.bool,
+  activePage: PropTypes.string,
+  navFunc: PropTypes.func,
+  logout: PropTypes.func,
+};

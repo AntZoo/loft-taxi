@@ -59,7 +59,7 @@ const Registration = (props) => {
 };
 
 Registration.propTypes = {
-  loginFunc: PropTypes.func,
+  register: PropTypes.func,
   navFunc: PropTypes.func,
 };
 
