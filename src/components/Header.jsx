@@ -3,18 +3,22 @@ import { withContext } from '../helpers/AppContext';
 import { Logo } from 'loft-taxi-mui-theme';
 import './Header.css';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const Header = (props) => {
   return (
     <header className='main-nav'>
       <nav>
         <div className='nav-logo'>
-          <Logo />
+          <Link to='/'>
+            <Logo />
+          </Link>
         </div>
         <ul className='nav-list'>
           {props.isLoggedIn && (
             <li>
-              <button
+              <Link to='/map'>Карта</Link>
+              {/* <button
                 className={
                   props.activePage === 'map'
                     ? 'nav-button active'
@@ -24,12 +28,13 @@ const Header = (props) => {
                   props.navFunc('map');
                 }}>
                 Карта
-              </button>
+              </button> */}
             </li>
           )}
           {props.isLoggedIn && (
             <li>
-              <button
+              <Link to='/profile'>Профиль</Link>
+              {/* <button
                 className={
                   props.activePage === 'profile'
                     ? 'nav-button active'
@@ -39,24 +44,26 @@ const Header = (props) => {
                   props.navFunc('profile');
                 }}>
                 Профиль
-              </button>
+              </button> */}
             </li>
           )}
           {props.isLoggedIn && (
             <li>
-              <button
+              <Link to='/login'>Выйти</Link>
+              {/* <button
                 className='nav-button'
                 onClick={() => {
                   props.logout();
                   props.navFunc('login');
                 }}>
                 Выйти
-              </button>
+              </button> */}
             </li>
           )}
           {!props.isLoggedIn && (
             <li>
-              <button
+              <Link to='/login'>Логин</Link>
+              {/* <button
                 className={
                   props.activePage === 'login'
                     ? 'nav-button active'
@@ -66,7 +73,7 @@ const Header = (props) => {
                   props.navFunc('login');
                 }}>
                 Логин
-              </button>
+              </button> */}
             </li>
           )}
         </ul>
