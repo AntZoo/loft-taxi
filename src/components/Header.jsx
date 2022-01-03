@@ -3,7 +3,7 @@ import { withContext } from '../helpers/AppContext';
 import { Logo } from 'loft-taxi-mui-theme';
 import './Header.css';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 const Header = (props) => {
   return (
@@ -15,10 +15,11 @@ const Header = (props) => {
           </Link>
         </div>
         <ul className='nav-list'>
-          {props.isLoggedIn && (
-            <li>
-              <Link to='/map'>Карта</Link>
-              {/* <button
+          <li>
+            <NavLink activeClassName='active' to='/map'>
+              Карта
+            </NavLink>
+            {/* <button
                 className={
                   props.activePage === 'map'
                     ? 'nav-button active'
@@ -29,12 +30,12 @@ const Header = (props) => {
                 }}>
                 Карта
               </button> */}
-            </li>
-          )}
-          {props.isLoggedIn && (
-            <li>
-              <Link to='/profile'>Профиль</Link>
-              {/* <button
+          </li>
+          <li>
+            <NavLink activeClassName='active' to='/profile'>
+              Профиль
+            </NavLink>
+            {/* <button
                 className={
                   props.activePage === 'profile'
                     ? 'nav-button active'
@@ -45,12 +46,12 @@ const Header = (props) => {
                 }}>
                 Профиль
               </button> */}
-            </li>
-          )}
-          {props.isLoggedIn && (
-            <li>
-              <Link to='/login'>Выйти</Link>
-              {/* <button
+          </li>
+          <li>
+            <NavLink activeClassName='active' to='/login'>
+              Выйти
+            </NavLink>
+            {/* <button
                 className='nav-button'
                 onClick={() => {
                   props.logout();
@@ -58,24 +59,7 @@ const Header = (props) => {
                 }}>
                 Выйти
               </button> */}
-            </li>
-          )}
-          {!props.isLoggedIn && (
-            <li>
-              <Link to='/login'>Логин</Link>
-              {/* <button
-                className={
-                  props.activePage === 'login'
-                    ? 'nav-button active'
-                    : 'nav-button'
-                }
-                onClick={() => {
-                  props.navFunc('login');
-                }}>
-                Логин
-              </button> */}
-            </li>
-          )}
+          </li>
         </ul>
       </nav>
     </header>

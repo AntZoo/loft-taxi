@@ -6,7 +6,7 @@ import { RegistrationWithAuth } from './pages/Registration';
 import Header from './components/Header';
 import { withContext } from './helpers/AppContext';
 import { Sidebar } from './components/Sidebar';
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 const App = (props) => {
   const navigateTo = (page) => {
@@ -24,16 +24,21 @@ const App = (props) => {
 
   return (
     <>
-      {props.isLoggedIn && <Header navFunc={navigateTo} />}
-      {!props.isLoggedIn && <Sidebar navFunc={navigateTo} />}
+      {props.isLoggedIn && <Header />}
+      {!props.isLoggedIn && <Sidebar />}
       <main>
         <section>
           <Switch>
-            <Route exact path='/' component={Map} />
+            <Route
+              exact
+              path='/'
+              component={props.isLoggedIn ? { Map } : { LoginWithAuth }}
+            />
             <Route path='/map' component={Map} />
             <Route path='/profile' component={Profile} />
             <Route path='/login' component={LoginWithAuth} />
             <Route path='/registration' component={RegistrationWithAuth} />
+            <Redirect from='*' to={Map} />
           </Switch>
           {/* {props.activePage === 'map' && <Map />}
           {props.activePage === 'profile' && <Profile />}
