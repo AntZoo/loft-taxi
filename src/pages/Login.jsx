@@ -5,7 +5,7 @@ import { Modal } from '../components/Modal';
 import { FormHeader } from '../components/FormHeader';
 import './LoginRegisterForm.css';
 import { ButtonSubmit } from '../components/ButtonSubmit';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Login = (props) => {
   const authenticate = (event) => {
