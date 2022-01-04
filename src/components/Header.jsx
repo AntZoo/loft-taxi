@@ -10,55 +10,30 @@ const Header = (props) => {
     <header className='main-nav'>
       <nav>
         <div className='nav-logo'>
-          <Link to='/'>
+          <Link to='/map'>
             <Logo />
           </Link>
         </div>
         <ul className='nav-list'>
           <li>
             <NavLink activeClassName='active' to='/map'>
-              Карта
+              <button>Карта</button>
             </NavLink>
-            {/* <button
-                className={
-                  props.activePage === 'map'
-                    ? 'nav-button active'
-                    : 'nav-button'
-                }
-                onClick={() => {
-                  props.navFunc('map');
-                }}>
-                Карта
-              </button> */}
           </li>
           <li>
             <NavLink activeClassName='active' to='/profile'>
-              Профиль
+              <button>Профиль</button>
             </NavLink>
-            {/* <button
-                className={
-                  props.activePage === 'profile'
-                    ? 'nav-button active'
-                    : 'nav-button'
-                }
-                onClick={() => {
-                  props.navFunc('profile');
-                }}>
-                Профиль
-              </button> */}
           </li>
           <li>
             <NavLink activeClassName='active' to='/login'>
-              Выйти
-            </NavLink>
-            {/* <button
-                className='nav-button'
+              <button
                 onClick={() => {
-                  props.logout();
-                  props.navFunc('login');
+                  props.setIsLoggedIn(false);
                 }}>
                 Выйти
-              </button> */}
+              </button>
+            </NavLink>
           </li>
         </ul>
       </nav>

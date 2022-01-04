@@ -13,7 +13,7 @@ export const Sidebar = (props) => {
           onClick={() => {
             props.navFunc('login');
           }}> */}
-        <Link to={props.isLoggedIn ? '/map' : '/login'}>
+        <Link to='/login'>
           <Logo />
         </Link>
         {/* </div> */}

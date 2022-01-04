@@ -32,13 +32,25 @@ const App = (props) => {
             <Route
               exact
               path='/'
-              component={props.isLoggedIn ? { Map } : { LoginWithAuth }}
+              component={props.isLoggedIn ? Map : LoginWithAuth}
             />
-            <Route path='/map' component={Map} />
-            <Route path='/profile' component={Profile} />
-            <Route path='/login' component={LoginWithAuth} />
-            <Route path='/registration' component={RegistrationWithAuth} />
-            <Redirect from='*' to={Map} />
+            <Route
+              path='/map'
+              component={props.isLoggedIn ? Map : LoginWithAuth}
+            />
+            <Route
+              path='/profile'
+              component={props.isLoggedIn ? Profile : LoginWithAuth}
+            />
+            <Route
+              path='/login'
+              component={props.isLoggedIn ? Map : LoginWithAuth}
+            />
+            <Route
+              path='/registration'
+              component={props.isLoggedIn ? Map : RegistrationWithAuth}
+            />
+            <Redirect from='*' to={props.isLoggedIn ? '/map' : '/login'} />
           </Switch>
           {/* {props.activePage === 'map' && <Map />}
           {props.activePage === 'profile' && <Profile />}

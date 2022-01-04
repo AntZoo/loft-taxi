@@ -10,7 +10,7 @@ const Login = (props) => {
   const authenticate = (event) => {
     event.preventDefault();
     const { email, password } = event.target;
-    props.login(email.value, password.value, props.navFunc, 'map');
+    props.login(email.value, password.value);
   };
 
   return (

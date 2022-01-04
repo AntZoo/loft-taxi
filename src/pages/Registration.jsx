@@ -9,7 +9,7 @@ const Registration = (props) => {
   const register = (event) => {
     event.preventDefault();
     const { email, password } = event.target;
-    props.register(email.value, password.value, props.navFunc, 'map');
+    props.register(email.value, password.value);
   };
 
   return (

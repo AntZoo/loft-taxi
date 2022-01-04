@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 export const AppContext = React.createContext();
 
@@ -6,24 +7,24 @@ export const AppProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [activePage, setActivePage] = React.useState('login');
 
-  const login = (email, password, navigate, where) => {
+  const login = (email, password) => {
     if (email !== 'valid@email.com' || password === '') {
       return;
     }
     setIsLoggedIn(true);
+
+    <Redirect to='/map' />;
   };
 
-  const register = (email, password, navigate, where) => {
+  const register = (email, password) => {
     setIsLoggedIn(true);
-  };
 
-  const logout = () => {
-    setIsLoggedIn(false);
+    <Redirect to='/map' />;
   };
 
   const value = {
     login,
-    logout,
+    setIsLoggedIn,
     register,
     isLoggedIn,
     activePage,
