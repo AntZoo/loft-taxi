@@ -9,7 +9,9 @@ const Registration = (props) => {
   const register = (event) => {
     event.preventDefault();
     const { email, password } = event.target;
-    props.register(email.value, password.value);
+    if (props.register(email.value, password.value)) {
+      props.history.push('/map');
+    }
   };
 
   return (

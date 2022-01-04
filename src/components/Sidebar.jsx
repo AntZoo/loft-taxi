@@ -4,7 +4,7 @@ import { Logo } from 'loft-taxi-mui-theme';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-export const Sidebar = (props) => {
+export const Sidebar = () => {
   return (
     <div className='sidebar-wrap'>
       <div className='sidebar'>
@@ -13,7 +13,7 @@ export const Sidebar = (props) => {
           onClick={() => {
             props.navFunc('login');
           }}> */}
-        <Link to='/login'>
+        <Link to='/map'>
           <Logo />
         </Link>
         {/* </div> */}

@@ -26,7 +26,7 @@ const Header = (props) => {
             </NavLink>
           </li>
           <li>
-            <NavLink activeClassName='active' to='/login'>
+            <NavLink to='/login'>
               <button
                 onClick={() => {
                   props.setIsLoggedIn(false);

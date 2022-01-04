@@ -5,12 +5,15 @@ import { Modal } from '../components/Modal';
 import { FormHeader } from '../components/FormHeader';
 import './LoginRegisterForm.css';
 import { ButtonSubmit } from '../components/ButtonSubmit';
+import { Link, Redirect } from 'react-router-dom';
 
 const Login = (props) => {
   const authenticate = (event) => {
     event.preventDefault();
     const { email, password } = event.target;
-    props.login(email.value, password.value);
+    if (props.login(email.value, password.value)) {
+      props.history.push('/map');
+    }
   };
 
   return (
@@ -36,14 +39,11 @@ const Login = (props) => {
           <div className='under-button'>
             <span>
               Новый пользователь?
-              <button
-                className='button-link'
-                type='button'
-                onClick={() => {
-                  props.navFunc('registration');
-                }}>
-                Регистрация
-              </button>
+              <Link to='/registration'>
+                <button className='button-link' type='button'>
+                  Регистрация
+                </button>
+              </Link>
             </span>
           </div>
         </div>

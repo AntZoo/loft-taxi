@@ -9,17 +9,17 @@ export const AppProvider = ({ children }) => {
 
   const login = (email, password) => {
     if (email !== 'valid@email.com' || password === '') {
-      return;
+      return false;
     }
     setIsLoggedIn(true);
 
-    <Redirect to='/map' />;
+    return true;
   };
 
   const register = (email, password) => {
     setIsLoggedIn(true);
 
-    <Redirect to='/map' />;
+    return true;
   };
 
   const value = {
