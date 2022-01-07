@@ -6,12 +6,13 @@ import './LoginRegisterForm.css';
 import { ButtonSubmit } from '../components/ButtonSubmit';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { login } from '../actions';
+import { authenticate } from '../actions';
 
 const Login = (props) => {
   const authenticate = (event) => {
     event.preventDefault();
-    props.login();
+    const { email, password } = event.target;
+    props.authenticate(email.value, password.value);
   };
 
   return (
@@ -56,5 +57,5 @@ Login.propTypes = {
 };
 
 export const LoginWithAuth = connect(null, {
-  login,
+  authenticate,
 })(Login);
