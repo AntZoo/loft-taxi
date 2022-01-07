@@ -1,4 +1,5 @@
 import React from 'react';
+import { PrivateRoute } from './components/PrivateRoute';
 import { Map } from './pages/Map';
 import { Profile } from './pages/Profile';
 import { LoginWithAuth } from './pages/Login';
@@ -10,20 +11,6 @@ import { connect } from 'react-redux';
 import { login } from './actions';
 
 const App = (props) => {
-  const navigateTo = (page) => {
-    if (props.isLoggedIn || ['login', 'registration'].includes(page)) {
-      const path = `/${page}`;
-      <Redirect to={path} />;
-    } else {
-      <Redirect to='/login' />;
-    }
-  };
-
-  React.useEffect(() => {
-    navigateTo('map');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.isLoggedIn]);
-
   return (
     <>
       {props.isLoggedIn && <Header />}
@@ -36,14 +23,8 @@ const App = (props) => {
               path='/'
               component={props.isLoggedIn ? Map : LoginWithAuth}
             />
-            <Route
-              path='/map'
-              component={props.isLoggedIn ? Map : LoginWithAuth}
-            />
-            <Route
-              path='/profile'
-              component={props.isLoggedIn ? Profile : LoginWithAuth}
-            />
+            <PrivateRoute path='/map' component={Map} />
+            <PrivateRoute path='/profile' component={Profile} />
             <Route
               path='/login'
               component={props.isLoggedIn ? Map : LoginWithAuth}
