@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withContext } from '../helpers/AppContext';
 import { Modal } from '../components/Modal';
 import { FormHeader } from '../components/FormHeader';
 import { ButtonSubmit } from '../components/ButtonSubmit';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { login } from '../actions';
 
 const Registration = (props) => {
   const register = (event) => {
     event.preventDefault();
-    const { email, password } = event.target;
-    if (props.register(email.value, password.value)) {
-      props.history.push('/map');
-    }
+    props.login();
   };
 
   return (
@@ -48,7 +47,7 @@ const Registration = (props) => {
                 className='button-link'
                 type='button'
                 onClick={() => {
-                  props.navFunc('login');
+                  <Redirect to='/login' />;
                 }}>
                 Войти
               </button>
@@ -65,4 +64,4 @@ Registration.propTypes = {
   navFunc: PropTypes.func,
 };
 
-export const RegistrationWithAuth = withContext(Registration);
+export const RegistrationWithAuth = connect(null, { login })(Registration);

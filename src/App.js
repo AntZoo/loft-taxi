@@ -4,16 +4,18 @@ import { Profile } from './pages/Profile';
 import { LoginWithAuth } from './pages/Login';
 import { RegistrationWithAuth } from './pages/Registration';
 import Header from './components/Header';
-import { withContext } from './helpers/AppContext';
 import { Sidebar } from './components/Sidebar';
 import { Redirect, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { login } from './actions';
 
 const App = (props) => {
   const navigateTo = (page) => {
     if (props.isLoggedIn || ['login', 'registration'].includes(page)) {
-      props.setActivePage(page);
+      const path = `/${page}`;
+      <Redirect to={path} />;
     } else {
-      props.setActivePage('login');
+      <Redirect to='/login' />;
     }
   };
 
@@ -52,18 +54,12 @@ const App = (props) => {
             />
             <Redirect from='*' to={props.isLoggedIn ? '/map' : '/login'} />
           </Switch>
-          {/* {props.activePage === 'map' && <Map />}
-          {props.activePage === 'profile' && <Profile />}
-          {props.activePage === 'login' && (
-            <LoginWithAuth navFunc={navigateTo} />
-          )}
-          {props.activePage === 'registration' && (
-            <RegistrationWithAuth navFunc={navigateTo} />
-          )} */}
         </section>
       </main>
     </>
   );
 };
 
-export default withContext(App);
+export default connect((state) => ({ isLoggedIn: state.auth.isLoggedIn }), {
+  login,
+})(App);

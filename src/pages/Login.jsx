@@ -1,19 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withContext } from '../helpers/AppContext';
 import { Modal } from '../components/Modal';
 import { FormHeader } from '../components/FormHeader';
 import './LoginRegisterForm.css';
 import { ButtonSubmit } from '../components/ButtonSubmit';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { login } from '../actions';
 
 const Login = (props) => {
   const authenticate = (event) => {
     event.preventDefault();
-    const { email, password } = event.target;
-    if (props.login(email.value, password.value)) {
-      props.history.push('/map');
-    }
+    props.login();
   };
 
   return (
@@ -57,4 +55,6 @@ Login.propTypes = {
   navFunc: PropTypes.func,
 };
 
-export const LoginWithAuth = withContext(Login);
+export const LoginWithAuth = connect(null, {
+  login,
+})(Login);

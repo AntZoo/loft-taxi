@@ -1,9 +1,10 @@
 import React from 'react';
-import { withContext } from '../helpers/AppContext';
 import { Logo } from 'loft-taxi-mui-theme';
 import './Header.css';
 import PropTypes from 'prop-types';
 import { NavLink, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logout } from '../actions';
 
 const Header = (props) => {
   return (
@@ -29,7 +30,7 @@ const Header = (props) => {
             <NavLink to='/login'>
               <button
                 onClick={() => {
-                  props.setIsLoggedIn(false);
+                  props.logout();
                 }}>
                 Выйти
               </button>
@@ -41,7 +42,9 @@ const Header = (props) => {
   );
 };
 
-export default withContext(Header);
+export default connect(null, {
+  logout,
+})(Header);
 
 Header.propTypes = {
   isLoggedIn: PropTypes.bool,
