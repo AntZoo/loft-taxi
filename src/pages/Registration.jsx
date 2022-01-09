@@ -5,7 +5,7 @@ import { FormHeader } from '../components/FormHeader';
 import { ButtonSubmit } from '../components/ButtonSubmit';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { login } from '../actions';
+import { InputBox } from '../components/InputBox';
 
 const Registration = (props) => {
   const register = (event) => {
@@ -14,29 +14,27 @@ const Registration = (props) => {
   };
 
   return (
-    <Modal height='height-600'>
+    <Modal height='height-620'>
       <FormHeader text='Регистрация' />
       <form onSubmit={register}>
-        <label htmlFor='email'>Email*:</label>
-        <input
-          id='email'
-          name='email'
-          type='email'
-          placeholder='mail@mail.ru'
+        <InputBox
+          Id='email'
+          Type='email'
+          Placeholder='mail@mail.ru'
+          LabelName='Email*'
         />
-        <label htmlFor='name'>Как вас зовут?*</label>
-        <input
-          id='name'
-          name='name'
-          type='text'
-          placeholder='Пётр Александрович'
+        <InputBox Id='name' Type='text' Placeholder='Пётр' LabelName='Имя*' />
+        <InputBox
+          Id='surname'
+          Type='text'
+          Placeholder='Александрович'
+          LabelName='Фамилия*'
         />
-        <label htmlFor='password'>Придумайте пароль*:</label>
-        <input
-          id='password'
-          name='password'
-          type='password'
-          placeholder='********'
+        <InputBox
+          Id='password'
+          Type='password'
+          Placeholder='********'
+          LabelName='Придумайте пароль*'
         />
         <div className='under-form'>
           <ButtonSubmit text='Войти' submit />

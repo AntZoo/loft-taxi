@@ -7,6 +7,7 @@ import { ButtonSubmit } from '../components/ButtonSubmit';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { authenticate } from '../actions';
+import { InputBox } from '../components/InputBox';
 
 const Login = (props) => {
   const authenticate = (event) => {
@@ -19,19 +20,17 @@ const Login = (props) => {
     <Modal height='height-480'>
       <FormHeader text='Войти' />
       <form onSubmit={authenticate}>
-        <label htmlFor='email'>Email:</label>
-        <input
-          id='email'
-          name='email'
-          type='email'
-          placeholder='mail@mail.ru'
+        <InputBox
+          Id='email'
+          Type='email'
+          Placeholder='mail@mail.ru'
+          LabelName='Email*'
         />
-        <label htmlFor='password'>Password:</label>
-        <input
-          id='password'
-          name='password'
-          type='password'
-          placeholder='********'
+        <InputBox
+          Id='password'
+          Type='password'
+          Placeholder='********'
+          LabelName='Password*'
         />
         <div className='under-form'>
           <ButtonSubmit text='Войти' submit />
