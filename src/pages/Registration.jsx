@@ -4,7 +4,7 @@ import { Modal } from '../components/Modal';
 import { FormHeader } from '../components/FormHeader';
 import { ButtonSubmit } from '../components/ButtonSubmit';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { register } from '../actions';
 import { InputBox } from '../components/InputBox';
 
@@ -39,18 +39,15 @@ const Registration = (props) => {
           LabelName='Придумайте пароль*'
         />
         <div className='under-form'>
-          <ButtonSubmit text='Войти' submit />
+          <ButtonSubmit text='Зарегистрироваться' submit />
           <div className='under-button'>
             <span>
               Уже зарегистрированы?
-              <button
-                className='button-link'
-                type='button'
-                onClick={() => {
-                  <Redirect to='/login' />;
-                }}>
-                Войти
-              </button>
+              <Link to='/login'>
+                <button className='button-link' type='button'>
+                  Войти
+                </button>
+              </Link>
             </span>
           </div>
         </div>
