@@ -1,7 +1,10 @@
 import { LOG_IN, LOG_OUT } from '../actions';
 
 const initialState = {
-  isLoggedIn: false,
+  isLoggedIn: localStorage.getItem('isLoggedIn')
+    ? localStorage.getItem('isLoggedIn')
+    : false,
+  token: localStorage.getItem('token') ? localStorage.getItem('token') : '',
 };
 
 export default function (state = initialState, action) {
