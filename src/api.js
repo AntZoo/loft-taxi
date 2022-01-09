@@ -8,7 +8,6 @@ export const serverLogin = async (email, password) => {
   })
     .then((resp) => resp.json())
     .then((data) => {
-      console.log(data);
       if (data.success) {
         return [data.success, null, data.token];
       } else {
@@ -32,7 +31,6 @@ export const serverRegister = async (email, password, name, surname) => {
   })
     .then((resp) => resp.json())
     .then((data) => {
-      console.log(data);
       if (data.success) {
         return [data.success, null, data.token];
       } else {
