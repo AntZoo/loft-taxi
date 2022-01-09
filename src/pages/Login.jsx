@@ -17,7 +17,7 @@ const Login = (props) => {
   };
 
   return (
-    <Modal height='height-480'>
+    <Modal absolute height='height-480'>
       <FormHeader text='Войти' />
       <form onSubmit={authenticate}>
         <InputBox

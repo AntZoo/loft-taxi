@@ -16,7 +16,7 @@ const Registration = (props) => {
   };
 
   return (
-    <Modal height='height-620'>
+    <Modal absolute height='height-620'>
       <FormHeader text='Регистрация' />
       <form onSubmit={register}>
         <InputBox
