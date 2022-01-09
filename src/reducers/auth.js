@@ -10,10 +10,12 @@ const initialState = {
 export default function (state = initialState, action) {
   switch (action.type) {
     case LOG_IN: {
-      return { isLoggedIn: true };
+      return { isLoggedIn: true, token: action.payload };
     }
     case LOG_OUT: {
-      return { isLoggedIn: false };
+      localStorage.setItem('isLoggedIn', false);
+      localStorage.setItem('token', '');
+      return { isLoggedIn: false, token: '' };
     }
     default:
       return state;
