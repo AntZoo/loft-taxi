@@ -5,12 +5,14 @@ import { FormHeader } from '../components/FormHeader';
 import { ButtonSubmit } from '../components/ButtonSubmit';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { register } from '../actions';
 import { InputBox } from '../components/InputBox';
 
 const Registration = (props) => {
   const register = (event) => {
     event.preventDefault();
-    props.login();
+    const { email, password, name, surname } = event.target;
+    props.register(email.value, password.value, name.value, surname.value);
   };
 
   return (
@@ -62,4 +64,4 @@ Registration.propTypes = {
   navFunc: PropTypes.func,
 };
 
-export const RegistrationWithAuth = connect(null, { login })(Registration);
+export const RegistrationWithAuth = connect(null, { register })(Registration);

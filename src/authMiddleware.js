@@ -1,13 +1,32 @@
 import { login } from './actions';
-import { serverLogin } from './api';
-import { AUTHENTICATE } from './actions';
+import { serverLogin, serverRegister } from './api';
+import { AUTHENTICATE, REGISTER } from './actions';
 
 export const authMiddleware = (store) => (next) => async (action) => {
   if (action.type === AUTHENTICATE) {
     const { email, password } = action.payload;
-    const success = await serverLogin(email, password);
+    const [success, error, token] = await serverLogin(email, password);
     if (success) {
-      store.dispatch(login());
+      store.dispatch(login(token));
+      localStorage.setItem('isLoggedIn', true);
+      localStorage.setItem('token', token);
+    } else {
+      alert(error);
+    }
+  } else if (action.type === REGISTER) {
+    const { email, password, name, surname } = action.payload;
+    const [success, error, token] = await serverRegister(
+      email,
+      password,
+      name,
+      surname
+    );
+    if (success) {
+      store.dispatch(login(token));
+      localStorage.setItem('isLoggedIn', true);
+      localStorage.setItem('token', token);
+    } else {
+      alert(error);
     }
   } else {
     next(action);
