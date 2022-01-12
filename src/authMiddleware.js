@@ -1,4 +1,4 @@
-import { login } from './actions';
+import { login, getCard } from './actions';
 import { serverLogin, serverRegister } from './api';
 import { AUTHENTICATE, REGISTER } from './actions';
 
@@ -8,8 +8,7 @@ export const authMiddleware = (store) => (next) => async (action) => {
     const [success, error, token] = await serverLogin(email, password);
     if (success) {
       store.dispatch(login(token));
-      localStorage.setItem('isLoggedIn', true);
-      localStorage.setItem('token', token);
+      store.dispatch(getCard(token));
     } else {
       alert(error);
     }
@@ -23,8 +22,6 @@ export const authMiddleware = (store) => (next) => async (action) => {
     );
     if (success) {
       store.dispatch(login(token));
-      localStorage.setItem('isLoggedIn', true);
-      localStorage.setItem('token', token);
     } else {
       alert(error);
     }

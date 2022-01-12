@@ -1,23 +1,18 @@
-import { LOG_IN, LOG_OUT } from '../actions';
+import { LOG_IN, LOG_OUT, REGISTER } from '../actions';
 
-const initialState = {
-  isLoggedIn: localStorage.getItem('isLoggedIn')
-    ? localStorage.getItem('isLoggedIn')
-    : false,
-  token: localStorage.getItem('token') ? localStorage.getItem('token') : '',
-};
-
-export default function (state = initialState, action) {
+// eslint-disable-next-line import/no-anonymous-default-export
+export default (state = {}, action) => {
   switch (action.type) {
     case LOG_IN: {
       return { isLoggedIn: true, token: action.payload };
     }
     case LOG_OUT: {
-      localStorage.setItem('isLoggedIn', false);
-      localStorage.setItem('token', '');
       return { isLoggedIn: false, token: '' };
+    }
+    case REGISTER: {
+      return { isLoggedIn: true, token: action.payload };
     }
     default:
       return state;
   }
-}
+};
