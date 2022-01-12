@@ -52,8 +52,10 @@ export const serverCardChange = async (
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      cardNumber: cardNumber,
-      expiryDate: expiryDate,
+      cardNumber: cardNumber
+        .replaceAll(/ /g, '')
+        .replaceAll(/(\d{4})(\d{4})(\d{4})(\d{4})/g, '$1 $2 $3 $4'),
+      expiryDate: expiryDate.replaceAll(/\d\d(\d\d)-(\d\d)/g, '$2/$1'),
       cardName: cardName,
       cvc: cvc,
       token: token,
@@ -61,11 +63,36 @@ export const serverCardChange = async (
   })
     .then((resp) => resp.json())
     .then((data) => {
-      console.log(data);
       if (data.success) {
         return [data.success, null];
       } else {
         return [data.success, data.error];
+      }
+    });
+};
+
+export const serverGetCard = async (token) => {
+  return fetch(`https://loft-taxi.glitch.me/card?token=${token}`, {
+    method: 'GET',
+  })
+    .then((resp) => resp.json())
+    .then((data) => {
+      if (data.cardNumber && data.cardName && data.expiryDate && data.cvc) {
+        return {
+          success: 'success',
+          cardNumber: data.cardNumber,
+          cardName: data.cardName,
+          cardDate: data.expiryDate.replaceAll(/(\d\d)\/(\d\d)/g, '20$2-$1'),
+          cardCode: data.cvc,
+        };
+      } else {
+        return {
+          success: 'failure',
+          cardNumber: null,
+          cardName: null,
+          cardDate: null,
+          cardCode: null,
+        };
       }
     });
 };
