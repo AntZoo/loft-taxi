@@ -42,7 +42,9 @@
     ]
   },
   "devDependencies": {
-    "cz-conventional-changelog": "^3.3.0"
+    "cz-conventional-changelog": "^3.3.0",
+    "redux-devtools-extension": "^2.13.9",
+    "throttle": "^1.0.3"
   },
   "config": {
     "commitizen": {
