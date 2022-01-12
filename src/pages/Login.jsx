@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Modal } from '../components/Modal';
 import { FormHeader } from '../components/FormHeader';
 import './LoginRegisterForm.css';
@@ -48,11 +47,6 @@ const Login = (props) => {
       </form>
     </Modal>
   );
-};
-
-Login.propTypes = {
-  loginFunc: PropTypes.func,
-  navFunc: PropTypes.func,
 };
 
 export const LoginWithAuth = connect(null, {
