@@ -1,6 +1,15 @@
 button.button-submit {
   background: #fdbf5a;
   border-radius: 70px;
+}
+
+button.button-small {
+  width: 175px;
+  height: 30px;
+  font-size: 15px;
+}
+
+button.button-large {
   width: 353px;
   height: 61px;
   font-size: 25px;
