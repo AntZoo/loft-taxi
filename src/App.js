@@ -1,91 +1,44 @@
-import React from 'react'
-import './App.css'
-import { Map } from './Map'
-import { Profile } from './Profile'
-import { Login } from './Login'
-import { Registration } from './Registration'
+import React from 'react';
+import { Map } from './pages/Map';
+import { Profile } from './pages/Profile';
+import { LoginWithAuth } from './pages/Login';
+import { RegistrationWithAuth } from './pages/Registration';
+import Header from './components/Header';
+import { withContext } from './helpers/AppContext';
+import { Sidebar } from './components/Sidebar';
 
-class App extends React.Component {
-  state = { currentPage: 'login', authenticated: false }
-
-  navigateTo = (page) => {
-    this.setState({ currentPage: page })
-  }
-
-  login = () => {
-    this.setState({ authenticated: true })
-  }
-
-  logout = () => {
-    this.setState({ authenticated: false })
-  }
-
-  PAGES = {
-    map: <Map loginFunc={this.login} navFunc={this.navigateTo} />,
-    profile: <Profile loginFunc={this.login} navFunc={this.navigateTo} />,
-    login: <Login loginFunc={this.login} navFunc={this.navigateTo} />,
-    registration: <Registration loginFunc={this.login} navFunc={this.navigateTo} />,
-  }
-
-  render() {
-    const renderNavMenu = () => {
-      if (this.state.authenticated) {
-        return (
-          <ul>
-            <li>
-              <button
-                onClick={() => {
-                  this.navigateTo('map')
-                }}>
-                Карта
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => {
-                  this.navigateTo('profile')
-                }}>
-                Профиль
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => {
-                  this.logout()
-                  this.navigateTo('login')
-                }}>
-                Выйти
-              </button>
-            </li>
-          </ul>
-        )
-      } else {
-        return (
-          <ul>
-            <li>
-              <button
-                onClick={() => {
-                  this.navigateTo('login')
-                }}>
-                Логин
-              </button>
-            </li>
-          </ul>
-        )
-      }
+const App = (props) => {
+  const navigateTo = (page) => {
+    if (props.isLoggedIn || ['login', 'registration'].includes(page)) {
+      props.setActivePage(page);
+    } else {
+      props.setActivePage('login');
     }
+  };
 
-    return (
-      <>
-        <header>
-          <nav>{renderNavMenu()}}</nav>
-        </header>
-        <main>
-          <section>{this.PAGES[this.state.currentPage]}</section>
-        </main>
-      </>
-    )
-  }
-}
+  React.useEffect(() => {
+    navigateTo('map');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.isLoggedIn]);
 
-export default App
+  return (
+    <>
+      {props.isLoggedIn && <Header navFunc={navigateTo} />}
+      {!props.isLoggedIn && <Sidebar navFunc={navigateTo} />}
+      <main>
+        <section>
+          {props.activePage === 'map' && <Map />}
+          {props.activePage === 'profile' && <Profile />}
+          {props.activePage === 'login' && (
+            <LoginWithAuth navFunc={navigateTo} />
+          )}
+          {props.activePage === 'registration' && (
+            <RegistrationWithAuth navFunc={navigateTo} />
+          )}
+        </section>
+      </main>
+    </>
+  );
+};
+
+export default withContext(App);
