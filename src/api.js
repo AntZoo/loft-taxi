@@ -9,9 +9,9 @@ export const serverLogin = async (email, password) => {
     .then((resp) => resp.json())
     .then((data) => {
       if (data.success) {
-        return [data.success, null, data.token];
+        return { success: data.success, error: null, token: data.token };
       } else {
-        return [data.success, data.error, null];
+        return { success: data.success, error: data.error, token: null };
       }
     });
 };
@@ -32,9 +32,9 @@ export const serverRegister = async (email, password, name, surname) => {
     .then((resp) => resp.json())
     .then((data) => {
       if (data.success) {
-        return [data.success, null, data.token];
+        return { success: data.success, error: null, token: data.token };
       } else {
-        return [data.success, data.error, null];
+        return { success: data.success, error: data.error, token: null };
       }
     });
 };
@@ -64,9 +64,9 @@ export const serverCardChange = async (
     .then((resp) => resp.json())
     .then((data) => {
       if (data.success) {
-        return [data.success, null];
+        return { success: data.success, error: null };
       } else {
-        return [data.success, data.error];
+        return { success: data.success, error: data.error };
       }
     });
 };
