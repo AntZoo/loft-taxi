@@ -1,55 +1,53 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withContext } from '../helpers/AppContext';
 import { Modal } from '../components/Modal';
 import { FormHeader } from '../components/FormHeader';
 import { ButtonSubmit } from '../components/ButtonSubmit';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { register } from '../actions';
+import { InputBox } from '../components/InputBox';
 
 const Registration = (props) => {
   const register = (event) => {
     event.preventDefault();
-    const { email, password } = event.target;
-    props.register(email.value, password.value, props.navFunc, 'map');
+    const { email, password, name, surname } = event.target;
+    props.register(email.value, password.value, name.value, surname.value);
   };
 
   return (
-    <Modal height='height-600'>
+    <Modal absolute height='height-620'>
       <FormHeader text='Регистрация' />
       <form onSubmit={register}>
-        <label htmlFor='email'>Email*:</label>
-        <input
-          id='email'
-          name='email'
-          type='email'
-          placeholder='mail@mail.ru'
+        <InputBox
+          Id='email'
+          Type='email'
+          Placeholder='mail@mail.ru'
+          LabelName='Email*'
         />
-        <label htmlFor='name'>Как вас зовут?*</label>
-        <input
-          id='name'
-          name='name'
-          type='text'
-          placeholder='Пётр Александрович'
+        <InputBox Id='name' Type='text' Placeholder='Пётр' LabelName='Имя*' />
+        <InputBox
+          Id='surname'
+          Type='text'
+          Placeholder='Александрович'
+          LabelName='Фамилия*'
         />
-        <label htmlFor='password'>Придумайте пароль*:</label>
-        <input
-          id='password'
-          name='password'
-          type='password'
-          placeholder='********'
+        <InputBox
+          Id='password'
+          Type='password'
+          Placeholder='********'
+          LabelName='Придумайте пароль*'
         />
         <div className='under-form'>
-          <ButtonSubmit text='Войти' submit />
+          <ButtonSubmit text='Зарегистрироваться' submit />
           <div className='under-button'>
             <span>
               Уже зарегистрированы?
-              <button
-                className='button-link'
-                type='button'
-                onClick={() => {
-                  props.navFunc('login');
-                }}>
-                Войти
-              </button>
+              <Link to='/login'>
+                <button className='button-link' type='button'>
+                  Войти
+                </button>
+              </Link>
             </span>
           </div>
         </div>
@@ -63,4 +61,4 @@ Registration.propTypes = {
   navFunc: PropTypes.func,
 };
 
-export const RegistrationWithAuth = withContext(Registration);
+export const RegistrationWithAuth = connect(null, { register })(Registration);

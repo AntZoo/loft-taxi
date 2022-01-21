@@ -1,81 +1,50 @@
 import React from 'react';
-import { withContext } from '../helpers/AppContext';
 import { Logo } from 'loft-taxi-mui-theme';
 import './Header.css';
 import PropTypes from 'prop-types';
+import { NavLink, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { logout } from '../actions';
 
 const Header = (props) => {
   return (
     <header className='main-nav'>
       <nav>
         <div className='nav-logo'>
-          <Logo />
+          <Link to='/map'>
+            <Logo />
+          </Link>
         </div>
         <ul className='nav-list'>
-          {props.isLoggedIn && (
-            <li>
+          <li>
+            <NavLink activeClassName='active' to='/map'>
+              <button>Карта</button>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink activeClassName='active' to='/profile'>
+              <button>Профиль</button>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to='/login'>
               <button
-                className={
-                  props.activePage === 'map'
-                    ? 'nav-button active'
-                    : 'nav-button'
-                }
-                onClick={() => {
-                  props.navFunc('map');
-                }}>
-                Карта
-              </button>
-            </li>
-          )}
-          {props.isLoggedIn && (
-            <li>
-              <button
-                className={
-                  props.activePage === 'profile'
-                    ? 'nav-button active'
-                    : 'nav-button'
-                }
-                onClick={() => {
-                  props.navFunc('profile');
-                }}>
-                Профиль
-              </button>
-            </li>
-          )}
-          {props.isLoggedIn && (
-            <li>
-              <button
-                className='nav-button'
                 onClick={() => {
                   props.logout();
-                  props.navFunc('login');
                 }}>
                 Выйти
               </button>
-            </li>
-          )}
-          {!props.isLoggedIn && (
-            <li>
-              <button
-                className={
-                  props.activePage === 'login'
-                    ? 'nav-button active'
-                    : 'nav-button'
-                }
-                onClick={() => {
-                  props.navFunc('login');
-                }}>
-                Логин
-              </button>
-            </li>
-          )}
+            </NavLink>
+          </li>
         </ul>
       </nav>
     </header>
   );
 };
 
-export default withContext(Header);
+export default connect(null, {
+  logout,
+})(Header);
 
 Header.propTypes = {
   isLoggedIn: PropTypes.bool,

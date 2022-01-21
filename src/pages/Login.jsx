@@ -1,49 +1,46 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withContext } from '../helpers/AppContext';
 import { Modal } from '../components/Modal';
 import { FormHeader } from '../components/FormHeader';
 import './LoginRegisterForm.css';
 import { ButtonSubmit } from '../components/ButtonSubmit';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { authenticate } from '../actions';
+import { InputBox } from '../components/InputBox';
 
 const Login = (props) => {
   const authenticate = (event) => {
     event.preventDefault();
     const { email, password } = event.target;
-    props.login(email.value, password.value, props.navFunc, 'map');
+    props.authenticate(email.value, password.value);
   };
 
   return (
-    <Modal height='height-480'>
+    <Modal absolute height='height-480'>
       <FormHeader text='Войти' />
       <form onSubmit={authenticate}>
-        <label htmlFor='email'>Email:</label>
-        <input
-          id='email'
-          name='email'
-          type='email'
-          placeholder='mail@mail.ru'
+        <InputBox
+          Id='email'
+          Type='email'
+          Placeholder='mail@mail.ru'
+          LabelName='Email*'
         />
-        <label htmlFor='password'>Password:</label>
-        <input
-          id='password'
-          name='password'
-          type='password'
-          placeholder='********'
+        <InputBox
+          Id='password'
+          Type='password'
+          Placeholder='********'
+          LabelName='Password*'
         />
         <div className='under-form'>
           <ButtonSubmit text='Войти' submit />
           <div className='under-button'>
             <span>
               Новый пользователь?
-              <button
-                className='button-link'
-                type='button'
-                onClick={() => {
-                  props.navFunc('registration');
-                }}>
-                Регистрация
-              </button>
+              <Link to='/registration'>
+                <button className='button-link' type='button'>
+                  Регистрация
+                </button>
+              </Link>
             </span>
           </div>
         </div>
@@ -52,9 +49,6 @@ const Login = (props) => {
   );
 };
 
-Login.propTypes = {
-  loginFunc: PropTypes.func,
-  navFunc: PropTypes.func,
-};
-
-export const LoginWithAuth = withContext(Login);
+export const LoginWithAuth = connect(null, {
+  authenticate,
+})(Login);

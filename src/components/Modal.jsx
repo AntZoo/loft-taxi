@@ -3,7 +3,9 @@ import './Modal.css';
 import PropTypes from 'prop-types';
 
 export const Modal = (props) => {
-  const cls = 'modal-window ' + props.height;
+  const cls =
+    (props.absolute ? 'modal-window-abs ' : 'modal-window-noabs ') +
+    props.height;
   return <div className={cls}>{props.children}</div>;
 };
 

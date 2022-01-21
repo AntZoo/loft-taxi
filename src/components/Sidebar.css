@@ -7,9 +7,12 @@
   display: flex;
 }
 
-.sidebar-logo img {
-  width: 20vw;
+.sidebar-logo-img {
   cursor: pointer;
+  object-fit: contain;
+  height: auto;
+  width: 100%;
+  padding: 100px;
 }
 
 .sidebar-background {

@@ -21,7 +21,7 @@
   color: white;
   cursor: pointer;
 }
-.nav-list button.active {
+.nav-list a.active button {
   color: #fdbf5a;
 }
 
