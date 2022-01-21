@@ -4,13 +4,13 @@ import { SAVE_CARD, GET_CARD } from './actions';
 
 export const cardMiddleware = (store) => (next) => async (action) => {
   if (action.type === SAVE_CARD) {
-    const { cardNumber, cardName, cardDate, cardCode } = action.payload;
-    const [success, error] = await serverCardChange(
+    const { cardNumber, cardName, cardDate, cardCode, token } = action.payload;
+    const { success, error } = await serverCardChange(
       cardNumber,
       cardDate,
       cardName,
       cardCode,
-      store.getState().auth.token
+      token
     );
     if (success) {
       alert('Сохранено.');

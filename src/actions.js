@@ -26,9 +26,9 @@ export const register = (email, password, name, surname) => ({
   type: REGISTER,
   payload: { email, password, name, surname },
 });
-export const saveCard = (cardNumber, cardName, cardDate, cardCode) => ({
+export const saveCard = (cardNumber, cardName, cardDate, cardCode, token) => ({
   type: SAVE_CARD,
-  payload: { cardNumber, cardName, cardDate, cardCode },
+  payload: { cardNumber, cardName, cardDate, cardCode, token },
 });
 export const getCard = (token) => ({
   type: GET_CARD,

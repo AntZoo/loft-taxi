@@ -15,7 +15,8 @@ export const Profile = (props) => {
       cardNumber.value,
       cardName.value,
       cardDate.value,
-      cardCvv.value
+      cardCvv.value,
+      props.token
     );
   };
 
@@ -69,6 +70,7 @@ export const ProfileWithAuth = connect(
     cardName: state.card.cardName,
     cardDate: state.card.cardDate,
     cardCode: state.card.cardCode,
+    token: state.auth.token,
   }),
   {
     saveCard,

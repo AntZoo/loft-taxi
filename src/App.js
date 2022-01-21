@@ -8,7 +8,6 @@ import Header from './components/Header';
 import { Sidebar } from './components/Sidebar';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { login } from './actions';
 import './App.css';
 
 const App = (props) => {
@@ -19,11 +18,11 @@ const App = (props) => {
       <main>
         <section>
           <Switch>
-            <Route
+            {/* <Route
               exact
               path='/'
               component={props.isLoggedIn ? Map : LoginWithAuth}
-            />
+            /> */}
             <PrivateRoute path='/map' component={Map} />
             <PrivateRoute path='/profile' component={ProfileWithAuth} />
             <Route
@@ -42,6 +41,7 @@ const App = (props) => {
   );
 };
 
-export default connect((state) => ({ isLoggedIn: state.auth.isLoggedIn }), {
-  login,
-})(App);
+export default connect(
+  (state) => ({ isLoggedIn: state.auth.isLoggedIn }),
+  null
+)(App);
